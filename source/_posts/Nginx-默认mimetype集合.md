@@ -1,7 +1,9 @@
 ---
 title: Nginx-默认mimetype集合
 date: 2019-04-30 15:05:34
-tags: Nginx, MIME Type
+tags: 
+    - Nginx
+    - MIME Type
 ---
 ```
 types {
