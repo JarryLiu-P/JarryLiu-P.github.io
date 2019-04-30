@@ -9,7 +9,7 @@ tags: TypeScript
 let isDone: boolean = false;
 ```
 #### 数字（Number）
-除了十六进制和十进制之外，TypeScript还支持ECMAScript 2015中引入的二进制和八进制。
+除了十六进制和十进制之外，`TypeScript` 还支持 `ECMAScript` 2015中引入的二进制和八进制。
 ```
 let decimal: number = 6;
 let hex: number = 0xf00d;
@@ -17,7 +17,7 @@ let binary: number = 0b1010;
 let octal: number = 0o744;
 ```
 #### 字符串（String）
-像JavaScript一样，TypeScript也使用双引号（"）或单引号（'）来包围字符串数据。
+像 `JavaScript` 一样，`TypeScript` 也使用双引号（"）或单引号（'）来包围字符串数据。
 ```
 let color: string = "blue";
 color = 'red';
@@ -80,7 +80,7 @@ let list: any[] = [1, true, "free"];
 list[1] = 100;
 ```
 #### 对象（Object）
-object是一种类型的，它表示非原始型的，即任何不是number，string，boolean，symbol，null，或undefined的类型。
+`object` 是一种类型的，它表示非原始型的，即任何不是 `number`，`string`，`boolean`，`symbol`，`null`，或 `undefined` 的类型。
 ```
 declare function create(o: object | null): void;
 
@@ -98,7 +98,7 @@ function warnUser(): void {
     console.log("This is my warning message");
 }
 ```
-声明类型的变量void没有用，因为您只能分配undefined或null给它们：
+声明类型的变量 `void` 没有用，因为您只能分配 `undefined` 或 `null` 给它们：
 ```
 let unusable: void = undefined;
 ```
