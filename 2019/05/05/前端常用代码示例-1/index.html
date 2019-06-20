@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>前端常用代码示例-1 | THAT-WHAT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Anagrams of string(变更字母顺序构成新字符串-字谜)使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用map（）将字母与每部分字谜组合，然后使用reduce（）将所有字谜组合到一个数组中，最基本情况是字符串长度等于2或1 123456789101112anagrams = str =&amp;gt; &amp;#123;    if (str.length &amp;lt; 2) &amp;#123;">
+<meta name="keywords" content="ECMAScript(JavaScript)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端常用代码示例-1">
+<meta property="og:url" content="https://jarryliu-p.github.io/2019/05/05/前端常用代码示例-1/index.html">
+<meta property="og:site_name" content="THAT-WHAT">
+<meta property="og:description" content="Anagrams of string(变更字母顺序构成新字符串-字谜)使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用map（）将字母与每部分字谜组合，然后使用reduce（）将所有字谜组合到一个数组中，最基本情况是字符串长度等于2或1 123456789101112anagrams = str =&amp;gt; &amp;#123;    if (str.length &amp;lt; 2) &amp;#123;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-20T10:03:27.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端常用代码示例-1">
+<meta name="twitter:description" content="Anagrams of string(变更字母顺序构成新字符串-字谜)使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用map（）将字母与每部分字谜组合，然后使用reduce（）将所有字谜组合到一个数组中，最基本情况是字符串长度等于2或1 123456789101112anagrams = str =&amp;gt; &amp;#123;    if (str.length &amp;lt; 2) &amp;#123;">
+  
+    <link rel="alternate" href="/atom.xml" title="THAT-WHAT" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="css/images/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">THAT-WHAT</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-前端常用代码示例-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/05/前端常用代码示例-1/" class="article-date">
+  <time datetime="2019-05-05T07:36:15.000Z" itemprop="datePublished">2019-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端常用代码示例-1
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>Anagrams of string(变更字母顺序构成新字符串-字谜)<br>使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用map（）将字母与每部分字谜组合，然后使用reduce（）将所有字谜组合到一个数组中，最基本情况是字符串长度等于2或1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">anagrams = <span class="function"><span class="params">str</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (str.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [str];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (str.length === <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [str, str[<span class="number">1</span>] + str[<span class="number">0</span>]]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> [...str].reduce(<span class="function">(<span class="params">pre, letter, i</span>) =&gt;</span></span><br><span class="line">        pre.concat(anagrams(str.slice(<span class="number">0</span>, i) + str.slice(i + <span class="number">1</span>)).map(<span class="function"><span class="params">value</span> =&gt;</span> letter + value)), []);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">anagrams(<span class="string">'abcd'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组平均数<br>使用reduce（）将每个值添加到累加器，初始值为0，总和除以数组长度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">average = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">pre, val</span>) =&gt;</span> pre + val, <span class="number">0</span>) / arr.length;</span><br><span class="line"></span><br><span class="line">average([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>大写每个单词的首字母<br>使使用replace（）匹配每个单词的第一个字符，并使用toUpperCase（）来将其大写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">capitalizeEveryWord = <span class="function"><span class="params">str</span> =&gt;</span> str.replace(<span class="regexp">/\b[a-z]/g</span>, char =&gt; char.toUpperCase());</span><br><span class="line"></span><br><span class="line">capitalizeEveryWord(<span class="string">'hello world !'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>首字母大写<br>使用slice（0,1）和toUpperCase（）大写第一个字母，slice（1）获取字符串的其余部分。省略lowerRest参数以保持字符串的其余部分不变，或将其设置为true以转换为小写。（注意：这和上一个示例不是同一件事情）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">capitalize = <span class="function">(<span class="params">str, lowerRest = <span class="literal">false</span></span>) =&gt;</span></span><br><span class="line">    str.slice(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + (lowerRest ? str.slice(<span class="number">1</span>).toLowerCase() : str.slice(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">capitalize(<span class="string">'jarryLiu'</span>,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符串反转</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reverseString = <span class="function"><span class="params">str</span> =&gt;</span> [...str].reverse().join(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">reverseString(<span class="string">'hello'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查回文<br>将字符串toLowerCase，并使用replace从中删除非字母的字符。然后拆分为单独字符，reverse，join（’’），与原始的非反转字符串进行比较</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">palindrome = <span class="function"><span class="params">str</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> s = str.toLowerCase().replace(<span class="regexp">/[^a-z0-9]/g</span>, <span class="string">''</span>);</span><br><span class="line">    <span class="keyword">return</span> s === [...s].reverse().join(<span class="string">''</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">palindrome(<span class="string">'eye'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>计算数组中值的出现次数<br>使用reduce迭代增加计数器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">countOccurrences = <span class="function">(<span class="params">arr, target</span>) =&gt;</span> </span><br><span class="line">    arr.reduce(<span class="function">(<span class="params">count, val</span>) =&gt;</span> val === target ? count + <span class="number">1</span> : count, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">countOccurrences([<span class="string">'a'</span>,<span class="string">'c'</span>,<span class="string">'c'</span>,<span class="string">'b'</span>,<span class="string">'d'</span>],<span class="string">'c'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Curry（柯里化）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curry = <span class="function">(<span class="params">fn, arity = fn.length, ...args</span>) =&gt;</span></span><br><span class="line">    arity &lt;= args.length ? fn(...args) : curry.bind(<span class="literal">null</span>, fn, arity, ...args);</span><br><span class="line"></span><br><span class="line">curry(<span class="built_in">Math</span>.max, <span class="number">3</span>)(<span class="number">3</span>)(<span class="number">7</span>)(<span class="number">90</span>);</span><br><span class="line">curry(<span class="built_in">Math</span>.pow)(<span class="number">2</span>)(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Deep flatten array(拍平数组)<br>递归，使用reduce来获取所有不是数组的元素,思考一下为什么不用 push</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//拍平二维数组</span></span><br><span class="line">flatten = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">a, v</span>) =&gt;</span> a.concat(v), []);</span><br><span class="line"><span class="comment">//递归拍平多维嵌套数组</span></span><br><span class="line">deepFlatten = <span class="function"><span class="params">arr</span> =&gt;</span></span><br><span class="line">    arr.reduce(<span class="function">(<span class="params">pre, val</span>) =&gt;</span></span><br><span class="line">        pre.concat(<span class="built_in">Array</span>.isArray(val) ? deepFlatten(val) : val), []);</span><br><span class="line"></span><br><span class="line">deepFlatten([<span class="number">8</span>,<span class="number">5</span>,[<span class="number">4</span>,[<span class="number">6</span>,[<span class="number">7</span>]]],<span class="number">4</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组比较差异<br>从b创建一个Set，然后在a上使用Array.filter,思考使用Set的好处</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">different = <span class="function">(<span class="params">arr1, arr2, include = <span class="literal">false</span></span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> _arr2 = <span class="keyword">new</span> <span class="built_in">Set</span>(arr2);</span><br><span class="line">    <span class="keyword">return</span> arr1.filter(<span class="function"><span class="params">ele</span> =&gt;</span> include ? _arr2.has(ele) : !_arr2.has(ele));</span><br><span class="line">&#125;</span><br><span class="line">similarity = <span class="function">(<span class="params">arr1, arr2</span>) =&gt;</span> arr1.filter(<span class="function"><span class="params">ele</span> =&gt;</span> arr2.includes(ele));</span><br><span class="line"></span><br><span class="line">different([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>], <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>计算两点之间欧几里得距离<br>Math.hypot</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">distance = <span class="function">(<span class="params">x0, y0, x1, y1</span>) =&gt;</span> <span class="built_in">Math</span>.hypot(x1 - x0, y1 - y0);</span><br><span class="line"></span><br><span class="line">distance(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转义正则表达式<br>转义正则表达式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">escapeRegExp = <span class="function"><span class="params">str</span> =&gt;</span> str.replace(<span class="regexp">/[.*+?^$&#123;&#125;()|[\]\\]/g</span>, <span class="string">'\\$&amp;'</span>);</span><br><span class="line"></span><br><span class="line">escapeRegExp(<span class="string">'(test)'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>阶乘<br>使用递归。如果n小于或等于1，则返回1。否则返回n和n – 1的阶乘的乘积</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">factorial = <span class="function"><span class="params">n</span> =&gt;</span> n &lt;= <span class="number">1</span> ? <span class="number">1</span> : n * factorial(n - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">factorial(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>斐波那契数组生成<br>创建一个特定长度的空数组，初始化前两个值(m,n)。使用Array.reduce向数组中添加值，后面的一个数等于前面两个数相加之和（前两个除外）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fibonacci = <span class="function">(<span class="params">l, m, n</span>) =&gt;</span> <span class="built_in">Array</span>(l).fill(<span class="number">0</span>).reduce(<span class="function">(<span class="params">pre, val, i</span>) =&gt;</span></span><br><span class="line">    pre.concat(i &gt; <span class="number">1</span> ? pre[i - <span class="number">1</span>] + pre[i - <span class="number">2</span>] : ((i === <span class="number">0</span>) ? m : n)), []);</span><br><span class="line"></span><br><span class="line">fibonacci(<span class="number">5</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>过滤数组中的非唯一值<br>将Array.filter用于仅包含唯一值的数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filterNonUnique = <span class="function"><span class="params">arr</span> =&gt;</span> arr.filter(<span class="function"><span class="params">i</span> =&gt;</span> arr.indexOf(i) === arr.lastIndexOf(i));</span><br><span class="line"></span><br><span class="line">filterNonUnique([<span class="number">1</span>,<span class="number">22</span>,<span class="number">3</span>,<span class="number">444</span>,<span class="number">3</span>,<span class="number">22</span>,<span class="number">6</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取最大公约数<br>使用递归。基本情况是当y等于0时。在这种情况下，返回m。否则，返回n的GCD和 m/n的其余部分</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcd = <span class="function">(<span class="params">m, n</span>) =&gt;</span> !n ? m : gcd(n, m % n);</span><br><span class="line"></span><br><span class="line">gcd(<span class="number">8</span>,<span class="number">36</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数执行计时<br>console.time</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">timeTaken = <span class="function"><span class="params">callback</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.time(<span class="string">'timetask'</span>);</span><br><span class="line">    <span class="keyword">let</span> r = callback();</span><br><span class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">'timetask'</span>);</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">timeTaken(<span class="function"><span class="params">()</span>=&gt;</span> anagrams(<span class="string">'abcdefghij'</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>键值对转对象<br>[[‘a’,1],[‘b’,2]] -&gt; {a: 1, b: 2}</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objFromPairs = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">pre, val</span>) =&gt;</span> (pre[val[<span class="number">0</span>]] = val[<span class="number">1</span>], pre), &#123;&#125;);</span><br><span class="line"></span><br><span class="line">objFromPairs([[<span class="string">'a'</span>,<span class="number">1</span>],[<span class="string">'b'</span>,<span class="number">2</span>]]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>管道函数<br>pipe(func1,func2…)(args)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pipe = <span class="function">(<span class="params">...funcs</span>) =&gt;</span> arg =&gt; funcs.reduce(<span class="function">(<span class="params">funcArgs, func</span>) =&gt;</span> func(funcArgs), arg);</span><br><span class="line"></span><br><span class="line">pipe(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="number">1</span>, x =&gt; <span class="built_in">console</span>.log(x))(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成数组幂集<br>[1,2] -&gt; [[], [1], [2], [2,1]]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">powerset = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">pre, val</span>) =&gt;</span> pre.concat(pre.map(<span class="function"><span class="params">ele</span> =&gt;</span> [val].concat(ele))), [[]]);</span><br><span class="line"></span><br><span class="line">powerset([<span class="number">1</span>,<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>范围内随机数(默认0-100)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">randomInRange = <span class="function">(<span class="params">min = <span class="number">0</span>, max = <span class="number">100</span></span>) =&gt;</span> <span class="built_in">Math</span>.random() * (max - min) + min;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.floor(randomInRange(<span class="number">2</span>,<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>随机化数组顺序</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shuffle = <span class="function"><span class="params">arr</span> =&gt;</span> arr.sort(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">Math</span>.random() - <span class="number">0.5</span>);</span><br><span class="line"></span><br><span class="line">shuffle([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>RGB转十六进制<br>(255, 165, 1) -&gt; ‘ffa501’。 *padStart(ES2017)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//rgbToHex = (r, g, b) =&gt; ((r &lt;&lt; 16) + (g &lt;&lt; 8) + b).toString(16).padStart(6,'0');</span></span><br><span class="line">rgbToHex = <span class="function">(<span class="params">r, g, b</span>) =&gt;</span> ((r &lt;&lt; <span class="number">16</span>) + (g &lt;&lt; <span class="number">8</span>) + b).toString(<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">rgbToHex(<span class="number">255</span>,<span class="number">165</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符串中字母排序<br>使用split（’‘）分割字符串，sort（）使用localeCompare（），使用join(‘’)重新组合</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sortCharsInString = <span class="function"><span class="params">str</span> =&gt;</span> [...str].sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.localeCompare(b)).join(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">sortCharsInString(<span class="string">'ibsuidibjbacb'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组元素求和<br>reduce累加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sumArray = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">sum, val</span>) =&gt;</span> sum + val, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">sumArray([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>交换变量值<br>数组解构</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="string">'bbb'</span>;</span><br><span class="line"><span class="keyword">let</span> c = &#123; <span class="attr">key</span>: <span class="string">'value'</span> &#125;;</span><br><span class="line">[a, b, c] = [c, a, b];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(a) + <span class="string">'-'</span> + b + <span class="string">'-'</span> + c)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组去重<br>…new Set(arr)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unique = <span class="function"><span class="params">arr</span> =&gt;</span> [...new <span class="built_in">Set</span>(arr)];</span><br><span class="line"></span><br><span class="line">unique([<span class="number">11</span>,<span class="number">22</span>,<span class="number">3</span>,<span class="number">444</span>,<span class="number">444</span>,<span class="number">55</span>,<span class="number">55</span>]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取URL参数<br>match + reduce + map</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getUrlParameters = <span class="function"><span class="params">url</span> =&gt;</span></span><br><span class="line">    url.match(<span class="regexp">/([^?=&amp;]+)(=([^&amp;]*))/g</span>).reduce(<span class="function">(<span class="params">obj, val</span>) =&gt;</span></span><br><span class="line">        (obj[val.slice(<span class="number">0</span>, val.indexOf(<span class="string">'='</span>))] = val.slice(val.indexOf(<span class="string">'='</span>) + <span class="number">1</span>), obj), &#123;&#125;);</span><br><span class="line"></span><br><span class="line">getUrlParameters(<span class="string">'http://url.com/page?name=Adam&amp;surname=Smith'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证数字<br>使用！isNaN和parseFloat（）来检查参数是否是一个数字，使用isFinite（）来检查数字是否是有限</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">validateNumber = <span class="function"><span class="params">n</span> =&gt;</span> !<span class="built_in">isNaN</span>(<span class="built_in">parseFloat</span>(n)) &amp;&amp; <span class="built_in">isFinite</span>(n) &amp;&amp; <span class="built_in">Number</span>(n) == n;</span><br><span class="line"></span><br><span class="line">validateNumber(<span class="number">10.1</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>过滤空值<br>空值指的是没有具体意义的一些值，比如0，undefined，null，false，空字符串等</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> res = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="string">'0'</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">false</span>, <span class="string">''</span>].filter(<span class="built_in">Boolean</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jarryliu-p.github.io/2019/05/05/前端常用代码示例-1/" data-id="cjx4kciv80005wwv5k0y2fgpb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript-JavaScript/">ECMAScript(JavaScript)</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/06/TCP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          TCP
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/05/为什么评审代码/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">为什么评审代码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code-Review/">Code Review</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript-JavaScript/">ECMAScript(JavaScript)</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Layout/">Layout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-Type/">MIME Type</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-T/">T&T</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Code-Review/" style="font-size: 10px;">Code Review</a> <a href="/tags/ECMAScript-JavaScript/" style="font-size: 10px;">ECMAScript(JavaScript)</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Layout/" style="font-size: 10px;">Layout</a> <a href="/tags/MIME-Type/" style="font-size: 10px;">MIME Type</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/T-T/" style="font-size: 10px;">T&T</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/20/改变/">改变</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/08/Git/">Git</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/常用布局/">常用布局</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/06/TCP/">TCP</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/05/前端常用代码示例-1/">前端常用代码示例-1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jarry Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>TCP | THAT-WHAT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TCP（Transmission Control Protocol 传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。 应用层向 TCP 层发送用于网间传输的、用8位字节表示的数据流，然后 TCP 把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（MTU）的限制）。 之后 TCP 把结果包传给 IP 层，由它来通过网络将包传送给接收端实体的 TC">
+<meta name="keywords" content="TCP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP">
+<meta property="og:url" content="https://jarryliu-p.github.io/2019/05/06/TCP/index.html">
+<meta property="og:site_name" content="THAT-WHAT">
+<meta property="og:description" content="TCP（Transmission Control Protocol 传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。 应用层向 TCP 层发送用于网间传输的、用8位字节表示的数据流，然后 TCP 把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（MTU）的限制）。 之后 TCP 把结果包传给 IP 层，由它来通过网络将包传送给接收端实体的 TC">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-20T10:03:27.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP">
+<meta name="twitter:description" content="TCP（Transmission Control Protocol 传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。 应用层向 TCP 层发送用于网间传输的、用8位字节表示的数据流，然后 TCP 把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（MTU）的限制）。 之后 TCP 把结果包传给 IP 层，由它来通过网络将包传送给接收端实体的 TC">
+  
+    <link rel="alternate" href="/atom.xml" title="THAT-WHAT" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="css/images/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">THAT-WHAT</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-TCP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/06/TCP/" class="article-date">
+  <time datetime="2019-05-06T01:21:20.000Z" itemprop="datePublished">2019-05-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TCP
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="TCP（Transmission-Control-Protocol-传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。"><a href="#TCP（Transmission-Control-Protocol-传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。" class="headerlink" title="TCP（Transmission Control Protocol 传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。"></a>TCP（Transmission Control Protocol 传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。</h3><ul>
+<li>应用层向 <code>TCP</code> 层发送用于网间传输的、用8位字节表示的数据流，然后 <code>TCP</code> 把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（<code>MTU</code>）的限制）。</li>
+<li>之后 <code>TCP</code> 把结果包传给 <code>IP</code> 层，由它来通过网络将包传送给接收端实体的 <code>TCP</code> 层。</li>
+<li><code>TCP</code> 为了保证不发生丢包，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。</li>
+<li>接收端实体对已成功收到的包发回一个相应的确认（<code>ACK</code>）；如果发送端实体在合理的往返时延（<code>RTT</code>）内未收到确认，那么对应的数据包就被假设为已丢失将会被进行重传。</li>
+<li><code>TCP</code> 用一个校验和函数来检验数据是否有错误；在发送和接收时都要计算校验和。</li>
+</ul>
+<h4 id="TCP-报文结构"><a href="#TCP-报文结构" class="headerlink" title="TCP 报文结构"></a><code>TCP</code> 报文结构</h4><ol>
+<li>源端口（Source Port）- 16 位（<code>bit</code>）</li>
+<li>目标端口（Destination Port）- 16 位<h5 id="源端口号和目的端口号，用来标识同一台计算机的不同的应用进程。TCP-报头中的源端口号和目的端口号同-IP-数据报中的源-IP-与目的-IP-唯一确定一条-TCP-连接。"><a href="#源端口号和目的端口号，用来标识同一台计算机的不同的应用进程。TCP-报头中的源端口号和目的端口号同-IP-数据报中的源-IP-与目的-IP-唯一确定一条-TCP-连接。" class="headerlink" title="源端口号和目的端口号，用来标识同一台计算机的不同的应用进程。TCP 报头中的源端口号和目的端口号同 IP 数据报中的源 IP 与目的 IP 唯一确定一条 TCP 连接。"></a>源端口号和目的端口号，用来标识同一台计算机的不同的应用进程。<code>TCP</code> 报头中的源端口号和目的端口号同 <code>IP</code> 数据报中的源 <code>IP</code> 与目的 <code>IP</code> 唯一确定一条 <code>TCP</code> 连接。</h5></li>
+<li>序列号（Sequence Number）- 发送数据包中的第一个字节的序列号，32位<h5 id="在-TCP-传送的流中，每一个字节一个序号。比如一个报文段的序号为-300，此报文段的数据部分共有-100-字节，则下一个报文段的序号为-400。序号确保了-TCP-传输的有序性。"><a href="#在-TCP-传送的流中，每一个字节一个序号。比如一个报文段的序号为-300，此报文段的数据部分共有-100-字节，则下一个报文段的序号为-400。序号确保了-TCP-传输的有序性。" class="headerlink" title="在 TCP 传送的流中，每一个字节一个序号。比如一个报文段的序号为 300，此报文段的数据部分共有 100 字节，则下一个报文段的序号为 400。序号确保了 TCP 传输的有序性。"></a>在 TCP 传送的流中，每一个字节一个序号。比如一个报文段的序号为 300，此报文段的数据部分共有 100 字节，则下一个报文段的序号为 400。序号确保了 TCP 传输的有序性。</h5></li>
+<li>确认序列号（Acknowledgment Number）- 32位<h5 id="指明下一个期待收到的字节序号，表明该序号之前的所有数据已经正确无误的收到。确认号只有当-ACK-标志为-1-时才有效。"><a href="#指明下一个期待收到的字节序号，表明该序号之前的所有数据已经正确无误的收到。确认号只有当-ACK-标志为-1-时才有效。" class="headerlink" title="指明下一个期待收到的字节序号，表明该序号之前的所有数据已经正确无误的收到。确认号只有当 ACK 标志为 1 时才有效。"></a>指明下一个期待收到的字节序号，表明该序号之前的所有数据已经正确无误的收到。确认号只有当 ACK 标志为 1 时才有效。</h5></li>
+<li>数据偏移（Data Offset）- 4位，该字段的值是 <code>TCP</code> 首部（包括选项）长度除以4<h5 id="首部长度也叫数据偏移，是因为首部长度实际上指示了数据区在报文段中的起始偏移值。"><a href="#首部长度也叫数据偏移，是因为首部长度实际上指示了数据区在报文段中的起始偏移值。" class="headerlink" title="首部长度也叫数据偏移，是因为首部长度实际上指示了数据区在报文段中的起始偏移值。"></a>首部长度也叫数据偏移，是因为首部长度实际上指示了数据区在报文段中的起始偏移值。</h5></li>
+<li>保留（Reserved）：为将来定义新的用途保留，现在一般置 0</li>
+<li>控制标志位 - 6位</li>
+<li>窗口（Window）- 滑动窗口大小，16位<h5 id="用来告诉TCP连接对端自己能够接收的最大数据长度。窗口大小最大为-65535。"><a href="#用来告诉TCP连接对端自己能够接收的最大数据长度。窗口大小最大为-65535。" class="headerlink" title="用来告诉TCP连接对端自己能够接收的最大数据长度。窗口大小最大为 65535。"></a>用来告诉TCP连接对端自己能够接收的最大数据长度。窗口大小最大为 65535。</h5></li>
+<li>校验和（Checksum）- 奇偶校验，16位<h5 id="此校验和是对整个的-TCP-报文段，包括-TCP-头部和-TCP-数据，以-16-位字进行计算所得。由发送端计算和存储，并由接收端进行验证。"><a href="#此校验和是对整个的-TCP-报文段，包括-TCP-头部和-TCP-数据，以-16-位字进行计算所得。由发送端计算和存储，并由接收端进行验证。" class="headerlink" title="此校验和是对整个的 TCP 报文段，包括 TCP 头部和 TCP 数据，以 16 位字进行计算所得。由发送端计算和存储，并由接收端进行验证。"></a>此校验和是对整个的 TCP 报文段，包括 <code>TCP</code> 头部和 <code>TCP</code> 数据，以 16 位字进行计算所得。由发送端计算和存储，并由接收端进行验证。</h5></li>
+<li>紧急指针（Urgent Pointers）- 紧急指针，16位<h5 id="只有当-URG-标志置-1-时紧急指针才有效。紧急指针是一个正的偏移量，和顺序号字段中的值相加表示紧急数据最后一个字节的序号。-TCP-的紧急方式是发送端向另一端发送紧急数据的一种方式。"><a href="#只有当-URG-标志置-1-时紧急指针才有效。紧急指针是一个正的偏移量，和顺序号字段中的值相加表示紧急数据最后一个字节的序号。-TCP-的紧急方式是发送端向另一端发送紧急数据的一种方式。" class="headerlink" title="只有当 URG 标志置 1 时紧急指针才有效。紧急指针是一个正的偏移量，和顺序号字段中的值相加表示紧急数据最后一个字节的序号。 TCP 的紧急方式是发送端向另一端发送紧急数据的一种方式。"></a>只有当 URG 标志置 1 时紧急指针才有效。紧急指针是一个正的偏移量，和顺序号字段中的值相加表示紧急数据最后一个字节的序号。 TCP 的紧急方式是发送端向另一端发送紧急数据的一种方式。</h5></li>
+<li>选项和填充（Options、Padding）<h5 id="最常见的可选字段是最长报文大小，又称为-MSS-Maximum-Segment-Size-，每个连接方通常都在通信的第一个报文段-为建立连接而设置-SYN-标志为-1-的那个段-中指明这个选项，它表示本端所能接受的最大报文段的长度。选项长度不一定是-32-位的整数倍，所以要加填充位，即在这个字段中加入额外的零，以保证-TCP-头是-32-的整数倍。"><a href="#最常见的可选字段是最长报文大小，又称为-MSS-Maximum-Segment-Size-，每个连接方通常都在通信的第一个报文段-为建立连接而设置-SYN-标志为-1-的那个段-中指明这个选项，它表示本端所能接受的最大报文段的长度。选项长度不一定是-32-位的整数倍，所以要加填充位，即在这个字段中加入额外的零，以保证-TCP-头是-32-的整数倍。" class="headerlink" title="最常见的可选字段是最长报文大小，又称为 MSS (Maximum Segment Size)，每个连接方通常都在通信的第一个报文段 (为建立连接而设置 SYN 标志为 1 的那个段)中指明这个选项，它表示本端所能接受的最大报文段的长度。选项长度不一定是 32 位的整数倍，所以要加填充位，即在这个字段中加入额外的零，以保证 TCP 头是 32 的整数倍。"></a>最常见的可选字段是最长报文大小，又称为 <code>MSS</code> (Maximum Segment Size)，每个连接方通常都在通信的第一个报文段 (为建立连接而设置 <code>SYN</code> 标志为 1 的那个段)中指明这个选项，它表示本端所能接受的最大报文段的长度。选项长度不一定是 32 位的整数倍，所以要加填充位，即在这个字段中加入额外的零，以保证 <code>TCP</code> 头是 32 的整数倍。</h5></li>
+<li>数据</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">控制位</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">URG</td>
+<td style="text-align:left">紧急指针标志，为 1 时表示紧急指针有效，为 0 则忽略紧急指针</td>
+</tr>
+<tr>
+<td style="text-align:left">ACK (Acknowledgement)</td>
+<td style="text-align:left">确认序号标志，为 1 时表示确认号有效，为 0 表示报文中不含确认信息，忽略确认号字段</td>
+</tr>
+<tr>
+<td style="text-align:left">PSH</td>
+<td style="text-align:left">push 标志，为 1 表示是带有 push 标志的数据，指示接收方在接收到该报文段以后，应尽快将这个报文段交给应用程序，而不是在缓冲区排队</td>
+</tr>
+<tr>
+<td style="text-align:left">RST</td>
+<td style="text-align:left">重置连接标志，用于重置由于主机崩溃或其他原因而出现错误的连接。或者用于拒绝非法的报文段和拒绝连接请求</td>
+</tr>
+<tr>
+<td style="text-align:left">SYN (Synchronize)</td>
+<td style="text-align:left">同步序号，用于建立连接过程，在连接请求中，<code>SYN</code>=1 和 <code>ACK</code>=0 表示该数据段没有使用捎带的确认域，而连接应答捎带一个确认，即 <code>SYN</code>=1 和 <code>ACK</code>=1</td>
+</tr>
+<tr>
+<td style="text-align:left">FIN (Finish)</td>
+<td style="text-align:left">用于释放连接，为 1 时表示发送方已经没有数据发送了，即关闭本方数据流</td>
+</tr>
+</tbody>
+</table>
+<h4 id="TCP-建立连接-三次握手"><a href="#TCP-建立连接-三次握手" class="headerlink" title="TCP 建立连接 (三次握手)"></a><code>TCP</code> 建立连接 (三次握手)</h4><p>TCP三次握手的过程如下：</p>
+<ol>
+<li>客户端发送 <code>SYN</code>（SEQ=x）报文给服务器端，进入SYN_SEND状态。</li>
+<li>服务器端收到 <code>SYN</code> 报文，回应一个 <code>SYN</code> （SEQ=y）<code>ACK</code> (ACK=x+1）报文，进入 <code>SYN_RECV</code> 状态。</li>
+<li>客户端收到服务器端的 <code>SYN</code> 报文，回应一个 <code>ACK</code>(ACK=y+1）报文，进入 <code>Established</code> 状态。</li>
+</ol>
+<p>三次握手完成，<code>TCP</code> 客户端和服务器端成功地建立连接，可以开始传输数据了。</p>
+<h4 id="TCP-关闭连接-四次挥手"><a href="#TCP-关闭连接-四次挥手" class="headerlink" title="TCP 关闭连接 (四次挥手)"></a><code>TCP</code> 关闭连接 (四次挥手)</h4><p>建立一个连接需要三次握手，而终止一个连接要经过四次握手，这是由 <code>TCP</code> 的半关闭（half-close）造成的。</p>
+<ol>
+<li>客户端调用 close() 函数，并发送一个 <code>FIN</code> (finish) 标志为 1 的数据包给服务端，来表示本方的数据已经全部发送完毕，此时客户端进入 <code>FIN_WAIT_1</code> 状态。<code>TCP</code> 规定，<code>FIN</code> 报文段即使不携带数据，也要消耗一个序号。</li>
+<li>服务端收到客户端的释放报文后，发出确认报文，其中 <code>ACK</code>=1, <code>ack</code>=u+1，并且带上自己的序列号 <code>seq</code>=v。表明自己接受到了客户端关闭连接的请求，但还没准备好关闭连接 (半关闭状态)，也就是说客户端已经没有数据要发送了，但服务端仍有可能会发送数据。发送完毕后，服务端进入 <code>CLOSE_WAIT</code> 状态。当客户端收到该报文后，客户端就进入 <code>FIN-WAIT-2</code> 状态，等待服务器发送连接释放报文。</li>
+<li>服务器端准备好关闭连接时，会向客户端发送一个连接释放报文，其中 <code>FIN</code>=1，<code>ack</code>=u+1。由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为 <code>seq</code>=w。发送完毕后，服务端便进入 <code>LAST-ACK</code>(最后确认) 状态。</li>
+<li>客户端收到服务器的连接释放报文后，需要发送一个确认包，其中 <code>ACK</code>=1，<code>ack</code>=w+1，而自己的序列号是 <code>seq</code>=u+1，并进入了 <code>TIME-WAIT</code> (时间等待)状态，等待过程可能出现的要求重传的 <code>ACK</code> 包。<br>此时 TCP 连接还没有释放，必须经过 2 * <code>MSL</code> (Maximum Segment Lifetime, 最长报文段寿命) 时间后，当客户端撤销相应的 <code>TCB</code> 后，才会进入 <code>CLOSED</code> 状态。<br>而服务器只要收到了客户端发出的确认，立即进入 <code>CLOSED</code> 状态。同样，撤销 <code>TCB</code> 后，就结束了这次的 <code>TCP</code> 连接。</li>
+</ol>
+<h4 id="TCP-和-UDP-的对比"><a href="#TCP-和-UDP-的对比" class="headerlink" title="TCP 和 UDP 的对比"></a><code>TCP</code> 和 <code>UDP</code> 的对比</h4><table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:left">UDP</th>
+<th style="text-align:left">TCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">是否连接</td>
+<td style="text-align:left">无连接</td>
+<td style="text-align:left">面向连接</td>
+</tr>
+<tr>
+<td style="text-align:right">是否可靠</td>
+<td style="text-align:left">不可靠传输，不使用流量控制和拥塞控制</td>
+<td style="text-align:left">可靠传输，使用流量控制和拥塞控制</td>
+</tr>
+<tr>
+<td style="text-align:right">连接对象个数</td>
+<td style="text-align:left">支持一对一，一对多，多对一和多对多交互通信</td>
+<td style="text-align:left">只能是一对一通信</td>
+</tr>
+<tr>
+<td style="text-align:right">传输方式</td>
+<td style="text-align:left">面向报文</td>
+<td style="text-align:left">面向字节流</td>
+</tr>
+<tr>
+<td style="text-align:right">首部开销</td>
+<td style="text-align:left">首部开销小，仅 8 字节</td>
+<td style="text-align:left">首部最小 20 字节，最大 60 字节</td>
+</tr>
+<tr>
+<td style="text-align:right">适用场景</td>
+<td style="text-align:left">适用于实时应用 (IP 电话、视频会议、直播等)</td>
+<td style="text-align:left">适用于要求可靠传输的应用，例如文件传输</td>
+</tr>
+</tbody>
+</table>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://juejin.im/post/5cc5421e5188252e761e7e12" target="_blank" rel="noopener">[HTTP 系列] 第 1 篇 —— 从 TCP/UDP 到 DNS 解析
+</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jarryliu-p.github.io/2019/05/06/TCP/" data-id="cjx4kciv10001wwv5qbk1ryzy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/07/常用布局/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          常用布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/05/前端常用代码示例-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">前端常用代码示例-1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code-Review/">Code Review</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript-JavaScript/">ECMAScript(JavaScript)</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Layout/">Layout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-Type/">MIME Type</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-T/">T&T</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Code-Review/" style="font-size: 10px;">Code Review</a> <a href="/tags/ECMAScript-JavaScript/" style="font-size: 10px;">ECMAScript(JavaScript)</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Layout/" style="font-size: 10px;">Layout</a> <a href="/tags/MIME-Type/" style="font-size: 10px;">MIME Type</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/T-T/" style="font-size: 10px;">T&T</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/20/改变/">改变</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/08/Git/">Git</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/常用布局/">常用布局</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/06/TCP/">TCP</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/05/前端常用代码示例-1/">前端常用代码示例-1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jarry Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

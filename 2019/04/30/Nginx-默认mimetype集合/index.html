@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Nginx-默认mimetype集合 | THAT-WHAT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596types &amp;#123;    t">
+<meta name="keywords" content="Nginx,MIME Type">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx-默认mimetype集合">
+<meta property="og:url" content="https://jarryliu-p.github.io/2019/04/30/Nginx-默认mimetype集合/index.html">
+<meta property="og:site_name" content="THAT-WHAT">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596types &amp;#123;    t">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-20T10:03:27.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx-默认mimetype集合">
+<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596types &amp;#123;    t">
+  
+    <link rel="alternate" href="/atom.xml" title="THAT-WHAT" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="css/images/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">THAT-WHAT</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Nginx-默认mimetype集合" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/30/Nginx-默认mimetype集合/" class="article-date">
+  <time datetime="2019-04-30T07:05:34.000Z" itemprop="datePublished">2019-04-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Nginx-默认mimetype集合
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">types &#123;</span><br><span class="line">    text/html                                        html htm shtml;</span><br><span class="line">    text/css                                         css;</span><br><span class="line">    text/xml                                         xml;</span><br><span class="line">    image/gif                                        gif;</span><br><span class="line">    image/jpeg                                       jpeg jpg;</span><br><span class="line">    application/javascript                           js;</span><br><span class="line">    application/atom+xml                             atom;</span><br><span class="line">    application/rss+xml                              rss;</span><br><span class="line"></span><br><span class="line">    text/mathml                                      mml;</span><br><span class="line">    text/plain                                       txt;</span><br><span class="line">    text/vnd.sun.j2me.app-descriptor                 jad;</span><br><span class="line">    text/vnd.wap.wml                                 wml;</span><br><span class="line">    text/x-component                                 htc;</span><br><span class="line"></span><br><span class="line">    image/png                                        png;</span><br><span class="line">    image/svg+xml                                    svg svgz;</span><br><span class="line">    image/tiff                                       tif tiff;</span><br><span class="line">    image/vnd.wap.wbmp                               wbmp;</span><br><span class="line">    image/webp                                       webp;</span><br><span class="line">    image/x-icon                                     ico;</span><br><span class="line">    image/x-jng                                      jng;</span><br><span class="line">    image/x-ms-bmp                                   bmp;</span><br><span class="line"></span><br><span class="line">    font/woff                                        woff;</span><br><span class="line">    font/woff2                                       woff2;</span><br><span class="line"></span><br><span class="line">    application/java-archive                         jar war ear;</span><br><span class="line">    application/json                                 json;</span><br><span class="line">    application/mac-binhex40                         hqx;</span><br><span class="line">    application/msword                               doc;</span><br><span class="line">    application/pdf                                  pdf;</span><br><span class="line">    application/postscript                           ps eps ai;</span><br><span class="line">    application/rtf                                  rtf;</span><br><span class="line">    application/vnd.apple.mpegurl                    m3u8;</span><br><span class="line">    application/vnd.google-earth.kml+xml             kml;</span><br><span class="line">    application/vnd.google-earth.kmz                 kmz;</span><br><span class="line">    application/vnd.ms-excel                         xls;</span><br><span class="line">    application/vnd.ms-fontobject                    eot;</span><br><span class="line">    application/vnd.ms-powerpoint                    ppt;</span><br><span class="line">    application/vnd.oasis.opendocument.graphics      odg;</span><br><span class="line">    application/vnd.oasis.opendocument.presentation  odp;</span><br><span class="line">    application/vnd.oasis.opendocument.spreadsheet   ods;</span><br><span class="line">    application/vnd.oasis.opendocument.text          odt;</span><br><span class="line">    application/vnd.openxmlformats-officedocument.presentationml.presentation</span><br><span class="line">                                                     pptx;</span><br><span class="line">    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</span><br><span class="line">                                                     xlsx;</span><br><span class="line">    application/vnd.openxmlformats-officedocument.wordprocessingml.document</span><br><span class="line">                                                     docx;</span><br><span class="line">    application/vnd.wap.wmlc                         wmlc;</span><br><span class="line">    application/x-7z-compressed                      7z;</span><br><span class="line">    application/x-cocoa                              cco;</span><br><span class="line">    application/x-java-archive-diff                  jardiff;</span><br><span class="line">    application/x-java-jnlp-file                     jnlp;</span><br><span class="line">    application/x-makeself                           run;</span><br><span class="line">    application/x-perl                               pl pm;</span><br><span class="line">    application/x-pilot                              prc pdb;</span><br><span class="line">    application/x-rar-compressed                     rar;</span><br><span class="line">    application/x-redhat-package-manager             rpm;</span><br><span class="line">    application/x-sea                                sea;</span><br><span class="line">    application/x-shockwave-flash                    swf;</span><br><span class="line">    application/x-stuffit                            sit;</span><br><span class="line">    application/x-tcl                                tcl tk;</span><br><span class="line">    application/x-x509-ca-cert                       der pem crt;</span><br><span class="line">    application/x-xpinstall                          xpi;</span><br><span class="line">    application/xhtml+xml                            xhtml;</span><br><span class="line">    application/xspf+xml                             xspf;</span><br><span class="line">    application/zip                                  zip;</span><br><span class="line"></span><br><span class="line">    application/octet-stream                         bin exe dll;</span><br><span class="line">    application/octet-stream                         deb;</span><br><span class="line">    application/octet-stream                         dmg;</span><br><span class="line">    application/octet-stream                         iso img;</span><br><span class="line">    application/octet-stream                         msi msp msm;</span><br><span class="line"></span><br><span class="line">    audio/midi                                       mid midi kar;</span><br><span class="line">    audio/mpeg                                       mp3;</span><br><span class="line">    audio/ogg                                        ogg;</span><br><span class="line">    audio/x-m4a                                      m4a;</span><br><span class="line">    audio/x-realaudio                                ra;</span><br><span class="line"></span><br><span class="line">    video/3gpp                                       3gpp 3gp;</span><br><span class="line">    video/mp2t                                       ts;</span><br><span class="line">    video/mp4                                        mp4;</span><br><span class="line">    video/mpeg                                       mpeg mpg;</span><br><span class="line">    video/quicktime                                  mov;</span><br><span class="line">    video/webm                                       webm;</span><br><span class="line">    video/x-flv                                      flv;</span><br><span class="line">    video/x-m4v                                      m4v;</span><br><span class="line">    video/x-mng                                      mng;</span><br><span class="line">    video/x-ms-asf                                   asx asf;</span><br><span class="line">    video/x-ms-wmv                                   wmv;</span><br><span class="line">    video/x-msvideo                                  avi;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jarryliu-p.github.io/2019/04/30/Nginx-默认mimetype集合/" data-id="cjx4kciv70004wwv5rjj27sia" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MIME-Type/">MIME Type</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/">Nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/05/ssh-keygen/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ssh-keygen
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/30/Nginx-基础使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Nginx-基础使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code-Review/">Code Review</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript-JavaScript/">ECMAScript(JavaScript)</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Layout/">Layout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-Type/">MIME Type</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-T/">T&T</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Code-Review/" style="font-size: 10px;">Code Review</a> <a href="/tags/ECMAScript-JavaScript/" style="font-size: 10px;">ECMAScript(JavaScript)</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Layout/" style="font-size: 10px;">Layout</a> <a href="/tags/MIME-Type/" style="font-size: 10px;">MIME Type</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/T-T/" style="font-size: 10px;">T&T</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/20/改变/">改变</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/08/Git/">Git</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/常用布局/">常用布局</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/06/TCP/">TCP</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/05/前端常用代码示例-1/">前端常用代码示例-1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jarry Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

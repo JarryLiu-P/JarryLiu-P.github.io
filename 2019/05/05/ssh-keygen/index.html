@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ssh-keygen | THAT-WHAT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ssh-keygen 参数说明 ssh-keygen - 生成、管理和转换认证密钥 ssh-keygen [-q] [-b bits] -t type [-N new_passphrase] [-C comment] [-foutput_keyfile] ssh-keygen -p [-P old_passphrase] [-N new_passphrase] [-f keyfile] ssh-k">
+<meta name="keywords" content="SSH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssh-keygen">
+<meta property="og:url" content="https://jarryliu-p.github.io/2019/05/05/ssh-keygen/index.html">
+<meta property="og:site_name" content="THAT-WHAT">
+<meta property="og:description" content="ssh-keygen 参数说明 ssh-keygen - 生成、管理和转换认证密钥 ssh-keygen [-q] [-b bits] -t type [-N new_passphrase] [-C comment] [-foutput_keyfile] ssh-keygen -p [-P old_passphrase] [-N new_passphrase] [-f keyfile] ssh-k">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-20T10:03:27.082Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ssh-keygen">
+<meta name="twitter:description" content="ssh-keygen 参数说明 ssh-keygen - 生成、管理和转换认证密钥 ssh-keygen [-q] [-b bits] -t type [-N new_passphrase] [-C comment] [-foutput_keyfile] ssh-keygen -p [-P old_passphrase] [-N new_passphrase] [-f keyfile] ssh-k">
+  
+    <link rel="alternate" href="/atom.xml" title="THAT-WHAT" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="css/images/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">THAT-WHAT</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ssh-keygen" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/05/ssh-keygen/" class="article-date">
+  <time datetime="2019-05-05T02:44:21.000Z" itemprop="datePublished">2019-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ssh-keygen
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="ssh-keygen-参数说明"><a href="#ssh-keygen-参数说明" class="headerlink" title="ssh-keygen 参数说明"></a><code>ssh-keygen</code> 参数说明</h2><ul>
+<li><code>ssh-keygen</code> - 生成、管理和转换认证密钥</li>
+<li><code>ssh-keygen</code> [-q] [-b bits] -t type [-N new_passphrase] [-C comment] [-foutput_keyfile]</li>
+<li><code>ssh-keygen</code> -p [-P old_passphrase] [-N new_passphrase] [-f keyfile]</li>
+<li><code>ssh-keygen</code> -i [-f input_keyfile]</li>
+<li><code>ssh-keygen</code> -e [-f input_keyfile]</li>
+<li><code>ssh-keygen</code> -y [-f input_keyfile]</li>
+<li><code>ssh-keygen</code> -c [-P passphrase] [-C comment] [-f keyfile]</li>
+<li><code>ssh-keygen</code> -l [-f input_keyfile]</li>
+<li><code>ssh-keygen</code> -B [-f input_keyfile]</li>
+<li><code>ssh-keygen</code> -D reader</li>
+<li><code>ssh-keygen</code> -F hostname [-f known_hosts_file]</li>
+<li><code>ssh-keygen</code> -H [-f known_hosts_file]</li>
+<li><code>ssh-keygen</code> -R hostname [-f known_hosts_file]</li>
+<li><code>ssh-keygen</code> -U reader [-f input_keyfile]</li>
+<li><code>ssh-keygen</code> -r hostname [-f input_keyfile] [-g]</li>
+<li><code>ssh-keygen</code> -G output_file [-v] [-b bits] [-M memory] [-S start_point]</li>
+<li><code>ssh-keygen</code> -T output_file -f input_file [-v] [-a num_trials] [-W generator]</li>
+</ul>
+<h2 id="ssh-keygen-用于为生成、管理和转换认证密钥，包括-RSA-和-DSA-两种密钥。"><a href="#ssh-keygen-用于为生成、管理和转换认证密钥，包括-RSA-和-DSA-两种密钥。" class="headerlink" title="ssh-keygen 用于为生成、管理和转换认证密钥，包括 RSA 和 DSA 两种密钥。"></a><code>ssh-keygen</code> 用于为生成、管理和转换认证密钥，包括 RSA 和 DSA 两种密钥。</h2><p>密钥类型可以用 <code>-t</code> 选项指定。如果没有指定则默认生成用于SSH-2的RSA密钥。<br><code>ssh-keygen</code> 还可以用来产生 <code>Diffie-Hellman group exchange (DH-GEX)</code> 中使用的素数模数。<br>一般说来，如果用户希望使用 <code>RSA</code> 或 <code>DSA</code> 认证，那么至少应该运行一次这个程序，<br>在 <code>~/.ssh/identity</code>, <code>~/.ssh/id_dsa</code> 或 <code>~/.ssh/id_rsa</code> 文件中创建认证所需的密钥。<br>另外，系统管理员还可以用它产生主机密钥。<br>通常，这个程序产生一个密钥对，并要求指定一个文件存放私钥，同时将公钥存放在附加了”.pub”后缀的同名文件中。<br>程序同时要求输入一个密语字符串(passphrase)，空表示没有密语(主机密钥的密语必须为空)。<br>密语和口令(password)非常相似，但是密语可以是一句话，里面有单词、标点符号、数字、空格或任何你想要的字符。<br>好的密语要30个以上的字符，难以猜出，由大小写字母、数字、非字母混合组成。密语可以用 <code>-p</code> 选项修改。<br>丢失的密语不可恢复。如果丢失或忘记了密语，用户必须产生新的密钥，然后把相应的公钥分发到其他机器上去。<br><code>RSA1</code> 的密钥文件中有一个”注释”字段，可以方便用户标识这个密钥，指出密钥的用途或其他有用的信息。<br>创建密钥的时候，注释域初始化为”user@host”，以后可以用 <code>-c</code> 选项修改。<br>密钥产生后，下面的命令描述了怎样处置和激活密钥。可用的选项有：<br>-a trials<br>        在使用 <code>-T</code> 对 <code>DH-GEX</code> 候选素数进行安全筛选时需要执行的基本测试数量。<br>-B      显示指定的公钥/私钥文件的 <code>bubblebabble</code> 摘要。<br>-b bits<br>        指定密钥长度。对于RSA密钥，最小要求768位，默认是2048位。DSA密钥必须恰好是1024位(<code>FIPS 186-2</code> 标准的要求)。<br>-C comment<br>        提供一个新注释<br>-c      要求修改私钥和公钥文件中的注释。本选项只支持 <code>RSA1</code> 密钥。<br>        程序将提示输入私钥文件名、密语(如果存在)、新注释。<br>-D reader<br>        下载存储在智能卡 <code>reader</code> 里的 <code>RSA</code> 公钥。<br>-e      读取OpenSSH的私钥或公钥文件，并以 <code>RFC</code> 4716 <code>SSH</code> 公钥文件格式在 <code>stdout</code> 上显示出来。<br>        该选项能够为多种商业版本的 <code>SSH</code> 输出密钥。<br>-F hostname<br>        在 <code>known_hosts</code> 文件中搜索指定的 <code>hostname</code> ，并列出所有的匹配项。<br>        这个选项主要用于查找散列过的主机名/<code>ip</code>地址，还可以和 <code>-H</code> 选项联用打印找到的公钥的散列值。<br>-f filename<br>        指定密钥文件名。<br>-G output_file<br>        为 <code>DH-GEX</code> 产生候选素数。这些素数必须在使用之前使用 <code>-T</code> 选项进行安全筛选。<br>-g      在使用 <code>-r</code> 打印指纹资源记录的时候使用通用的 <code>DNS</code> 格式。<br>-H      对 <code>known_hosts</code> 文件进行散列计算。这将把文件中的所有主机名/<code>ip</code>地址替换为相应的散列值。<br>        原来文件的内容将会添加一个”.old”后缀后保存。这些散列值只能被 <code>ssh</code> 和 <code>sshd</code> 使用。<br>        这个选项不会修改已经经过散列的主机名/<code>ip</code>地址，因此可以在部分公钥已经散列过的文件上安全使用。<br>-i      读取未加密的 <code>SSH-2</code> 兼容的私钥/公钥文件，然后在 <code>stdout</code> 显示 <code>OpenSSH</code> 兼容的私钥/公钥。<br>        该选项主要用于从多种商业版本的 <code>SSH</code> 中导入密钥。<br>-l      显示公钥文件的指纹数据。它也支持 <code>RSA1</code> 的私钥。<br>        对于 <code>RSA</code> 和 <code>DSA</code> 密钥，将会寻找对应的公钥文件，然后显示其指纹数据。<br>-M memory<br>        指定在生成 <code>DH-GEXS</code> 候选素数的时候最大内存用量(<code>MB</code>)。<br>-N new_passphrase<br>        提供一个新的密语。<br>-P passphrase<br>        提供(旧)密语。<br>-p      要求改变某私钥文件的密语而不重建私钥。程序将提示输入私钥文件名、原来的密语、以及两次输入新密语。<br>-q      安静模式。用于在 <code>/etc/rc</code> 中创建新密钥的时候。<br>-R hostname<br>        从 <code>known_hosts</code> 文件中删除所有属于 <code>hostname</code> 的密钥。<br>        这个选项主要用于删除经过散列的主机(参见 <code>-H</code> 选项)的密钥。<br>-r hostname<br>        打印名为 <code>hostname</code> 的公钥文件的 <code>SSHFP</code> 指纹资源记录。<br>-S start<br>        指定在生成 <code>DH-GEX</code> 候选模数时的起始点(16进制)。<br>-T output_file<br>        测试 <code>Diffie-Hellman group exchange</code> 候选素数(由 <code>-G</code> 选项生成)的安全性。<br>-t type<br>        指定要创建的密钥类型。可以使用：”rsa1”(<code>SSH-1</code>) “rsa”(<code>SSH-2</code>) “dsa”(<code>SSH-2</code>)<br>-U reader<br>        把现存的 <code>RSA</code> 私钥上传到智能卡 <code>reader</code><br>-v      详细模式。<code>ssh-keygen</code> 将会输出处理过程的详细调试信息。常用于调试模数的产生过程。<br>        重复使用多个 <code>-v</code> 选项将会增加信息的详细程度(最大3次)。<br>-W generator<br>        指定在为 <code>DH-GEX</code> 测试候选模数时想要使用的 <code>generator</code><br>-y      读取 <code>OpenSSH</code> 专有格式的公钥文件，并将 <code>OpenSSH</code> 公钥显示在 <code>stdout</code> 上。<br>ssh-keygen 可以生成用于 <code>Diffie-Hellman Group Exchange (DH-GEX)</code> 协议的 <code>groups</code> 。<br>生成过程分为两步：<br>首先，使用一个快速且消耗内存较多的方法生成一些候选素数。然后，对这些素数进行适应性测试(消耗<code>CPU</code>较多)。<br>可以使用 <code>-G</code> 选项生成候选素数，同时使用 <code>-b</code> 选项制定其位数。例如：</p>
+<h3 id="ssh-keygen-G-moduli-2048-candidates-b-2048"><a href="#ssh-keygen-G-moduli-2048-candidates-b-2048" class="headerlink" title="ssh-keygen -G moduli-2048.candidates -b 2048"></a>ssh-keygen -G moduli-2048.candidates -b 2048</h3><p>默认将从指定位数范围内的一个随机点开始搜索素数，不过可以使用 <code>-S</code> 选项来指定这个随机点(16进制)。<br>生成一组候选数之后，接下来就需要使用 <code>-T</code> 选项进行适应性测试。<br>此时 <code>ssh-keygen</code> 将会从 <code>stdin</code> 读取候选素数(或者通过 <code>-f</code> 选项读取一个文件)，例如：</p>
+<h3 id="ssh-keygen-T-moduli-2048-f-moduli-2048-candidates"><a href="#ssh-keygen-T-moduli-2048-f-moduli-2048-candidates" class="headerlink" title="ssh-keygen -T moduli-2048 -f moduli-2048.candidates"></a>ssh-keygen -T moduli-2048 -f moduli-2048.candidates</h3><p>每个候选素数默认都要通过 100 个基本测试(可以通过 <code>-a</code> 选项修改)。<br><code>DH generator</code> 的值会自动选择，但是你也可以通过 <code>-W</code> 选项强制指定。有效的值可以是： 2, 3, 5<br>经过筛选之后的 <code>DH groups</code> 就可以存放到 <code>/etc/ssh/moduli</code> 里面了。<br>很重要的一点是这个文件必须包括不同长度范围的模数，而且通信双方双方共享相同的模数。</p>
+<h3 id="ssh-identity"><a href="#ssh-identity" class="headerlink" title="~/.ssh/identity"></a>~/.ssh/identity</h3><p>该用户默认的 <code>RSA1</code> 身份认证私钥(<code>SSH-1</code>)。此文件的权限应当至少限制为”600”。<br>生成密钥的时候可以指定采用密语来加密该私钥(<code>3DES</code>)。<br>将在登录的时候读取这个文件。</p>
+<h3 id="ssh-identity-pub"><a href="#ssh-identity-pub" class="headerlink" title="~/.ssh/identity.pub"></a>~/.ssh/identity.pub</h3><p>该用户默认的 <code>RSA1</code> 身份认证公钥(<code>SSH-1</code>)。此文件无需保密。<br>此文件的内容应该添加到所有 <code>RSA1</code> 目标主机的 <code>~/.ssh/authorized_keys</code> 文件中。</p>
+<h3 id="ssh-id-dsa"><a href="#ssh-id-dsa" class="headerlink" title="~/.ssh/id_dsa"></a>~/.ssh/id_dsa</h3><p>该用户默认的 <code>DSA</code> 身份认证私钥(<code>SSH-2</code>)。此文件的权限应当至少限制为”600”。<br>生成密钥的时候可以指定采用密语来加密该私钥(<code>3DES</code>)。<br>将在登录的时候读取这个文件。</p>
+<h3 id="ssh-id-dsa-pub"><a href="#ssh-id-dsa-pub" class="headerlink" title="~/.ssh/id_dsa.pub"></a>~/.ssh/id_dsa.pub</h3><p>该用户默认的 <code>DSA</code> 身份认证公钥(<code>SSH-2</code>)。此文件无需保密。<br>此文件的内容应该添加到所有 <code>DSA</code> 目标主机的 <code>~/.ssh/authorized_keys</code> 文件中。</p>
+<h3 id="ssh-id-rsa"><a href="#ssh-id-rsa" class="headerlink" title="~/.ssh/id_rsa"></a>~/.ssh/id_rsa</h3><p>该用户默认的 <code>RSA</code> 身份认证私钥(<code>SSH-2</code>)。此文件的权限应当至少限制为”600”。<br>生成密钥的时候可以指定采用密语来加密该私钥(<code>3DES</code>)。<br>将在登录的时候读取这个文件。</p>
+<h3 id="ssh-id-rsa-pub"><a href="#ssh-id-rsa-pub" class="headerlink" title="~/.ssh/id_rsa.pub"></a>~/.ssh/id_rsa.pub</h3><p>该用户默认的 <code>RSA</code> 身份认证公钥(<code>SSH-2</code>)。此文件无需保密。<br>此文件的内容应该添加到所有 <code>RSA</code> 目标主机的 <code>~/.ssh/authorized_keys</code> 文件中。</p>
+<h3 id="etc-ssh-moduli"><a href="#etc-ssh-moduli" class="headerlink" title="/etc/ssh/moduli"></a>/etc/ssh/moduli</h3><p>包含用于 <code>DH-GEX</code> 的 <code>Diffie-Hellman groups</code> </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jarryliu-p.github.io/2019/05/05/ssh-keygen/" data-id="cjx4kcivs000mwwv5yemqildy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/05/为什么评审代码/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          为什么评审代码
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/04/30/Nginx-默认mimetype集合/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Nginx-默认mimetype集合</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code-Review/">Code Review</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript-JavaScript/">ECMAScript(JavaScript)</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Layout/">Layout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-Type/">MIME Type</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-T/">T&T</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Code-Review/" style="font-size: 10px;">Code Review</a> <a href="/tags/ECMAScript-JavaScript/" style="font-size: 10px;">ECMAScript(JavaScript)</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Layout/" style="font-size: 10px;">Layout</a> <a href="/tags/MIME-Type/" style="font-size: 10px;">MIME Type</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/T-T/" style="font-size: 10px;">T&T</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/20/改变/">改变</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/08/Git/">Git</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/07/常用布局/">常用布局</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/06/TCP/">TCP</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/05/前端常用代码示例-1/">前端常用代码示例-1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jarry Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>
