@@ -56,6 +56,100 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-systemctl命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/07/systemctl命令/" class="article-date">
+  <time datetime="2019-08-07T03:30:30.000Z" itemprop="datePublished">2019-08-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/07/systemctl命令/">systemctl命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><code>systemd</code> 是由红帽公司的一名叫做 <code>Lennart Poettering</code> 的员工开发，<code>systemd</code> 是 <code>Linux</code> 系统中最新的初始化系统（init）,它主要的设计目的是克服 <code>Sys V</code> 固有的缺点，提高系统的启动速度，<code>systemd</code> 和 <code>upstart</code> 是竞争对手，<code>ubantu</code> 上使用的是 <code>upstart</code> 的启动方式，<code>centos</code> <code>7</code>上使用 <code>systemd</code> 替换了 <code>Sys V</code>，<code>Systemd</code> 目录是要取代 <code>Unix</code> 时代依赖一直在使用的 init 系统，兼容 <code>Sys V</code> 和 <code>LSB</code> 的启动脚本，而且能够在进程启动中更有效地引导加载服务。<br><code>system</code>：系统启动和服务器守护进程管理器，负责在系统启动或运行时，激活系统资源，服务器进程和其他进程，根据管理，字母 d 是守护进程（daemon）的缩写，<code>systemd</code> 这个名字的含义就是它要守护整个系统。<br>监视和控制systemd的主要命令是 <code>systemctl</code>。</p>
+<h3 id="systemd-新特性"><a href="#systemd-新特性" class="headerlink" title="systemd 新特性"></a>systemd 新特性</h3><ul>
+<li>系统引导时实现服务并行启动</li>
+<li>按需启动守护进程</li>
+<li>同时采用 <code>socket</code> 式与 <code>D-Bus</code> 总线式激活服务</li>
+<li>系统状态快照和恢复</li>
+<li>利用 <code>Linux</code> 的 <code>cgroups</code> 监视进程</li>
+<li>维护挂载点和自动挂载点</li>
+<li>各服务间基于依赖关系进行精密控制</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ul>
+<li><h4 id="检查systemd是否正在运行"><a href="#检查systemd是否正在运行" class="headerlink" title="检查systemd是否正在运行"></a>检查systemd是否正在运行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eaf | grep systemd</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>systemd</code> 作为父守护进程运行（PID = 1）。 在上面的命令ps中使用（-e）选择所有进程，（-a）选择除会话前导之外的所有进程和（-f）选择完整格式列表（即-eaf）。</p>
+<ul>
+<li><h4 id="分析systemd启动过程"><a href="#分析systemd启动过程" class="headerlink" title="分析systemd启动过程"></a>分析systemd启动过程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-analyze</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>exp: Startup finished in 714ms (kernel) + 1.483s (initrd) + 8.458s (userspace) = 10.656s</p>
+<ul>
+<li><h4 id="分析每个进程在引导时花费的时间"><a href="#分析每个进程在引导时花费的时间" class="headerlink" title="分析每个进程在引导时花费的时间"></a>分析每个进程在引导时花费的时间</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-analyze blame</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>exp:<br>2.682s network.service<br>2.221s kdump.service<br>1.773s cloud-init-local.service<br>1.302s tuned.service<br>910ms YDService.service<br>869ms cloud-config.service<br>793ms vdo.service<br>650ms cloud-final.service<br>533ms polkit.service<br>526ms cloud-init.service<br>411ms lvm2-monitor.service<br>405ms rhel-dmesg.service<br>402ms ntpd.service<br>399ms acpid.service<br>348ms systemd-journal-flush.service<br>337ms nginx.service<br>316ms dev-vda1.device</p>
+<ul>
+<li><h4 id="分析启动时的关键链"><a href="#分析启动时的关键链" class="headerlink" title="分析启动时的关键链"></a>分析启动时的关键链</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-analyze critical-chain</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>exp:<br>The time after the unit is active or started is printed after the “@” character.<br>The time the unit takes to start is printed after the “+” character.<br>multi-user.target @7.016s<br>└─tuned.service @5.713s +1.302s<br>  └─network.target @5.708s<br>    └─network.service @3.025s +2.682s<br>      └─network-pre.target @3.024s<br>        └─cloud-init-local.service @1.250s +1.773s<br>          └─basic.target @1.243s<br>            └─sockets.target @1.243s<br>              └─dbus.socket @1.242s<br>                └─sysinit.target @1.242s<br>                  └─systemd-update-utmp.service @1.225s +15ms<br>                    └─auditd.service @1.012s +212ms<br>                      └─systemd-tmpfiles-setup.service @991ms +20ms<br>                        └─rhel-import-state.service @902ms +88ms<br>                          └─local-fs.target @897ms<br>                            └─local-fs-pre.target @897ms<br>                              └─lvm2-monitor.service @485ms +411ms<br>                                └─lvm2-lvmetad.service @557ms<br>                                  └─lvm2-lvmetad.socket @485ms<br>                                    └─-.slice</p>
+<ul>
+<li><h4 id="检查单元或者服务是否启用"><a href="#检查单元或者服务是否启用" class="headerlink" title="检查单元或者服务是否启用"></a>检查单元或者服务是否启用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl is-enabled nginx.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="检查单元或服务是否正在运行"><a href="#检查单元或服务是否正在运行" class="headerlink" title="检查单元或服务是否正在运行"></a>检查单元或服务是否正在运行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl status nginx.service</span><br><span class="line">systemctl status nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="列出所有服务（包括启用和禁用）"><a href="#列出所有服务（包括启用和禁用）" class="headerlink" title="列出所有服务（包括启用和禁用）"></a>列出所有服务（包括启用和禁用）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-unit-files --type=service</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="启动，重新启动，停止，重新加载服务"><a href="#启动，重新启动，停止，重新加载服务" class="headerlink" title="启动，重新启动，停止，重新加载服务"></a>启动，重新启动，停止，重新加载服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx.service</span><br><span class="line">systemctl restart nginx.service</span><br><span class="line">systemctl stop nginx.service</span><br><span class="line">systemctl reload nginx.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="如何在引导时激活服务并启用或禁用服务（系统引导时自动启动服务）"><a href="#如何在引导时激活服务并启用或禁用服务（系统引导时自动启动服务）" class="headerlink" title="如何在引导时激活服务并启用或禁用服务（系统引导时自动启动服务）"></a>如何在引导时激活服务并启用或禁用服务（系统引导时自动启动服务）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl is-active nginx.service</span><br><span class="line">systemctl enable nginx.service</span><br><span class="line">systemctl disable nginx.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="如何使用systemctl命令终止服务"><a href="#如何使用systemctl命令终止服务" class="headerlink" title="如何使用systemctl命令终止服务"></a>如何使用systemctl命令终止服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl kill nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="检查服务的所有配置详细信息"><a href="#检查服务的所有配置详细信息" class="headerlink" title="检查服务的所有配置详细信息"></a>检查服务的所有配置详细信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl show nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="分析服务的关键链（nginx）"><a href="#分析服务的关键链（nginx）" class="headerlink" title="分析服务的关键链（nginx）"></a>分析服务的关键链（nginx）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-analyze critical-chain nginx.service</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>exp:<br>The time after the unit is active or started is printed after the “@” character.<br>The time the unit takes to start is printed after the “+” character.</p>
+<p>nginx.service +337ms<br>└─network.target @5.708s<br>  └─network.service @3.025s +2.682s<br>    └─network-pre.target @3.024s<br>      └─cloud-init-local.service @1.250s +1.773s<br>        └─basic.target @1.243s<br>          └─sockets.target @1.243s<br>            └─dbus.socket @1.242s<br>              └─sysinit.target @1.242s<br>                └─systemd-update-utmp.service @1.225s +15ms<br>                  └─auditd.service @1.012s +212ms<br>                    └─systemd-tmpfiles-setup.service @991ms +20ms<br>                      └─rhel-import-state.service @902ms +88ms<br>                        └─local-fs.target @897ms<br>                          └─local-fs-pre.target @897ms<br>                            └─lvm2-monitor.service @485ms +411ms<br>                              └─lvm2-lvmetad.service @557ms<br>                                └─lvm2-lvmetad.socket @485ms<br>                                  └─-.slice</p>
+<ul>
+<li><h4 id="获取服务的依赖项列表（nginx）"><a href="#获取服务的依赖项列表（nginx）" class="headerlink" title="获取服务的依赖项列表（nginx）"></a>获取服务的依赖项列表（nginx）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-dependencies nginx.service</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>exp:<br>nginx.service<br>● ├─-.mount<br>● ├─system.slice<br>● └─basic.target<br>●   ├─rhel-dmesg.service<br>●   ├─<a href="mailto:selinux-policy-migrate-local-changes@targeted.service" target="_blank" rel="noopener">selinux-policy-migrate-local-changes@targeted.service</a><br>●   ├─paths.target<br>●   ├─slices.target<br>●   │ ├─-.slice<br>●   │ └─system.slice<br>●   ├─sockets.target<br>●   │ ├─dbus.socket<br>●   │ ├─dm-event.socket<br>●   │ ├─rpcbind.socket<br>●   │ ├─systemd-initctl.socket<br>●   │ ├─systemd-journald.socket<br>●   │ ├─systemd-shutdownd.socket<br>●   │ ├─systemd-udevd-control.socket<br>●   │ └─systemd-udevd-kernel.socket<br>●   ├─sysinit.target<br>●   │ ├─dev-hugepages.mount<br>●   │ ├─dev-mqueue.mount<br>●   │ ├─kmod-static-nodes.service<br>●   │ ├─lvm2-lvmetad.socket<br>●   │ ├─lvm2-lvmpolld.socket<br>●   │ ├─lvm2-monitor.service<br>●   │ ├─plymouth-read-write.service<br>●   │ ├─plymouth-start.service<br>●   │ ├─proc-sys-fs-binfmt_misc.automount<br>●   │ ├─rhel-autorelabel.service<br>●   │ ├─rhel-domainname.service<br>●   │ ├─rhel-import-state.service<br>●   │ ├─rhel-loadmodules.service<br>●   │ ├─sys-fs-fuse-connections.mount<br>●   │ ├─sys-kernel-config.mount<br>●   │ ├─sys-kernel-debug.mount<br>●   │ ├─systemd-ask-password-console.path<br>●   │ ├─systemd-binfmt.service<br>●   │ ├─systemd-firstboot.service<br>●   │ ├─systemd-hwdb-update.service<br>●   │ ├─systemd-journal-catalog-update.service<br>●   │ ├─systemd-journal-flush.service<br>●   │ ├─systemd-journald.service<br>●   │ ├─systemd-machine-id-commit.service<br>●   │ ├─systemd-modules-load.service<br>●   │ ├─systemd-random-seed.service<br>●   │ ├─systemd-sysctl.service<br>●   │ ├─systemd-tmpfiles-setup-dev.service<br>●   │ ├─systemd-tmpfiles-setup.service<br>●   │ ├─systemd-udev-trigger.service<br>●   │ ├─systemd-udevd.service<br>●   │ ├─systemd-update-done.service<br>●   │ ├─systemd-update-utmp.service<br>●   │ ├─systemd-vconsole-setup.service<br>●   │ ├─cryptsetup.target<br>●   │ ├─local-fs.target<br>●   │ │ ├─-.mount<br>●   │ │ ├─rhel-readonly.service<br>●   │ │ ├─systemd-fsck-root.service<br>●   │ │ └─systemd-remount-fs.service<br>●   │ └─swap.target<br>●   └─timers.target<br>●     └─systemd-tmpfiles-clean.timer</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p><a href="https://linux265.com/news/3385.html" target="_blank" rel="noopener">systemctl 命令详解及使用教程</a><br><a href="https://www.jianshu.com/p/828a40ae4bdd" target="_blank" rel="noopener">CentOS7下Systemctl详解</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://jarryliu-p.github.io/2019/08/07/systemctl命令/" data-id="cjz0vf9z0000l0wv56qk5feuw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/systemctl/">systemctl</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-改变" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/20/改变/" class="article-date">
@@ -126,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jarryliu-p.github.io/2019/06/20/改变/" data-id="cjx4kcivb0009wwv511lc2jqi" class="article-share-link">Share</a>
+      <a data-url="https://jarryliu-p.github.io/2019/06/20/改变/" data-id="cjz0vf9yx000i0wv57kwmmbxg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/T-T/">T&T</a></li></ul>
@@ -307,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jarryliu-p.github.io/2019/05/08/Git/" data-id="cjx4kcivq000lwwv5s1eohtoq" class="article-share-link">Share</a>
+      <a data-url="https://jarryliu-p.github.io/2019/05/08/Git/" data-id="cjz0vf9yz000j0wv5wgumfgz2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -375,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jarryliu-p.github.io/2019/05/07/常用布局/" data-id="cjx4kcivv000owwv5tc0je4l5" class="article-share-link">Share</a>
+      <a data-url="https://jarryliu-p.github.io/2019/05/07/常用布局/" data-id="cjz0vf9z4000n0wv5pw02qja6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Layout/">Layout</a></li></ul>
@@ -525,139 +619,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://jarryliu-p.github.io/2019/05/06/TCP/" data-id="cjx4kciv10001wwv5qbk1ryzy" class="article-share-link">Share</a>
+      <a data-url="https://jarryliu-p.github.io/2019/05/06/TCP/" data-id="cjz0vf9yg00060wv51x9uuppu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/">TCP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-前端常用代码示例-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/05/前端常用代码示例-1/" class="article-date">
-  <time datetime="2019-05-05T07:36:15.000Z" itemprop="datePublished">2019-05-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/05/前端常用代码示例-1/">前端常用代码示例-1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>Anagrams of string(变更字母顺序构成新字符串-字谜)<br>使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用map（）将字母与每部分字谜组合，然后使用reduce（）将所有字谜组合到一个数组中，最基本情况是字符串长度等于2或1</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">anagrams = <span class="function"><span class="params">str</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (str.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [str];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (str.length === <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [str, str[<span class="number">1</span>] + str[<span class="number">0</span>]]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> [...str].reduce(<span class="function">(<span class="params">pre, letter, i</span>) =&gt;</span></span><br><span class="line">        pre.concat(anagrams(str.slice(<span class="number">0</span>, i) + str.slice(i + <span class="number">1</span>)).map(<span class="function"><span class="params">value</span> =&gt;</span> letter + value)), []);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">anagrams(<span class="string">'abcd'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数组平均数<br>使用reduce（）将每个值添加到累加器，初始值为0，总和除以数组长度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">average = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">pre, val</span>) =&gt;</span> pre + val, <span class="number">0</span>) / arr.length;</span><br><span class="line"></span><br><span class="line">average([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>大写每个单词的首字母<br>使使用replace（）匹配每个单词的第一个字符，并使用toUpperCase（）来将其大写</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">capitalizeEveryWord = <span class="function"><span class="params">str</span> =&gt;</span> str.replace(<span class="regexp">/\b[a-z]/g</span>, char =&gt; char.toUpperCase());</span><br><span class="line"></span><br><span class="line">capitalizeEveryWord(<span class="string">'hello world !'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>首字母大写<br>使用slice（0,1）和toUpperCase（）大写第一个字母，slice（1）获取字符串的其余部分。省略lowerRest参数以保持字符串的其余部分不变，或将其设置为true以转换为小写。（注意：这和上一个示例不是同一件事情）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">capitalize = <span class="function">(<span class="params">str, lowerRest = <span class="literal">false</span></span>) =&gt;</span></span><br><span class="line">    str.slice(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + (lowerRest ? str.slice(<span class="number">1</span>).toLowerCase() : str.slice(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">capitalize(<span class="string">'jarryLiu'</span>,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>字符串反转</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reverseString = <span class="function"><span class="params">str</span> =&gt;</span> [...str].reverse().join(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">reverseString(<span class="string">'hello'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>检查回文<br>将字符串toLowerCase，并使用replace从中删除非字母的字符。然后拆分为单独字符，reverse，join（’’），与原始的非反转字符串进行比较</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">palindrome = <span class="function"><span class="params">str</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> s = str.toLowerCase().replace(<span class="regexp">/[^a-z0-9]/g</span>, <span class="string">''</span>);</span><br><span class="line">    <span class="keyword">return</span> s === [...s].reverse().join(<span class="string">''</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">palindrome(<span class="string">'eye'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>计算数组中值的出现次数<br>使用reduce迭代增加计数器</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">countOccurrences = <span class="function">(<span class="params">arr, target</span>) =&gt;</span> </span><br><span class="line">    arr.reduce(<span class="function">(<span class="params">count, val</span>) =&gt;</span> val === target ? count + <span class="number">1</span> : count, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">countOccurrences([<span class="string">'a'</span>,<span class="string">'c'</span>,<span class="string">'c'</span>,<span class="string">'b'</span>,<span class="string">'d'</span>],<span class="string">'c'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Curry（柯里化）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curry = <span class="function">(<span class="params">fn, arity = fn.length, ...args</span>) =&gt;</span></span><br><span class="line">    arity &lt;= args.length ? fn(...args) : curry.bind(<span class="literal">null</span>, fn, arity, ...args);</span><br><span class="line"></span><br><span class="line">curry(<span class="built_in">Math</span>.max, <span class="number">3</span>)(<span class="number">3</span>)(<span class="number">7</span>)(<span class="number">90</span>);</span><br><span class="line">curry(<span class="built_in">Math</span>.pow)(<span class="number">2</span>)(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Deep flatten array(拍平数组)<br>递归，使用reduce来获取所有不是数组的元素,思考一下为什么不用 push</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//拍平二维数组</span></span><br><span class="line">flatten = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">a, v</span>) =&gt;</span> a.concat(v), []);</span><br><span class="line"><span class="comment">//递归拍平多维嵌套数组</span></span><br><span class="line">deepFlatten = <span class="function"><span class="params">arr</span> =&gt;</span></span><br><span class="line">    arr.reduce(<span class="function">(<span class="params">pre, val</span>) =&gt;</span></span><br><span class="line">        pre.concat(<span class="built_in">Array</span>.isArray(val) ? deepFlatten(val) : val), []);</span><br><span class="line"></span><br><span class="line">deepFlatten([<span class="number">8</span>,<span class="number">5</span>,[<span class="number">4</span>,[<span class="number">6</span>,[<span class="number">7</span>]]],<span class="number">4</span>]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数组比较差异<br>从b创建一个Set，然后在a上使用Array.filter,思考使用Set的好处</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">different = <span class="function">(<span class="params">arr1, arr2, include = <span class="literal">false</span></span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> _arr2 = <span class="keyword">new</span> <span class="built_in">Set</span>(arr2);</span><br><span class="line">    <span class="keyword">return</span> arr1.filter(<span class="function"><span class="params">ele</span> =&gt;</span> include ? _arr2.has(ele) : !_arr2.has(ele));</span><br><span class="line">&#125;</span><br><span class="line">similarity = <span class="function">(<span class="params">arr1, arr2</span>) =&gt;</span> arr1.filter(<span class="function"><span class="params">ele</span> =&gt;</span> arr2.includes(ele));</span><br><span class="line"></span><br><span class="line">different([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>], <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>计算两点之间欧几里得距离<br>Math.hypot</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">distance = <span class="function">(<span class="params">x0, y0, x1, y1</span>) =&gt;</span> <span class="built_in">Math</span>.hypot(x1 - x0, y1 - y0);</span><br><span class="line"></span><br><span class="line">distance(<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>转义正则表达式<br>转义正则表达式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">escapeRegExp = <span class="function"><span class="params">str</span> =&gt;</span> str.replace(<span class="regexp">/[.*+?^$&#123;&#125;()|[\]\\]/g</span>, <span class="string">'\\$&amp;'</span>);</span><br><span class="line"></span><br><span class="line">escapeRegExp(<span class="string">'(test)'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>阶乘<br>使用递归。如果n小于或等于1，则返回1。否则返回n和n – 1的阶乘的乘积</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">factorial = <span class="function"><span class="params">n</span> =&gt;</span> n &lt;= <span class="number">1</span> ? <span class="number">1</span> : n * factorial(n - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">factorial(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>斐波那契数组生成<br>创建一个特定长度的空数组，初始化前两个值(m,n)。使用Array.reduce向数组中添加值，后面的一个数等于前面两个数相加之和（前两个除外）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fibonacci = <span class="function">(<span class="params">l, m, n</span>) =&gt;</span> <span class="built_in">Array</span>(l).fill(<span class="number">0</span>).reduce(<span class="function">(<span class="params">pre, val, i</span>) =&gt;</span></span><br><span class="line">    pre.concat(i &gt; <span class="number">1</span> ? pre[i - <span class="number">1</span>] + pre[i - <span class="number">2</span>] : ((i === <span class="number">0</span>) ? m : n)), []);</span><br><span class="line"></span><br><span class="line">fibonacci(<span class="number">5</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>过滤数组中的非唯一值<br>将Array.filter用于仅包含唯一值的数组</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filterNonUnique = <span class="function"><span class="params">arr</span> =&gt;</span> arr.filter(<span class="function"><span class="params">i</span> =&gt;</span> arr.indexOf(i) === arr.lastIndexOf(i));</span><br><span class="line"></span><br><span class="line">filterNonUnique([<span class="number">1</span>,<span class="number">22</span>,<span class="number">3</span>,<span class="number">444</span>,<span class="number">3</span>,<span class="number">22</span>,<span class="number">6</span>]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>获取最大公约数<br>使用递归。基本情况是当y等于0时。在这种情况下，返回m。否则，返回n的GCD和 m/n的其余部分</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcd = <span class="function">(<span class="params">m, n</span>) =&gt;</span> !n ? m : gcd(n, m % n);</span><br><span class="line"></span><br><span class="line">gcd(<span class="number">8</span>,<span class="number">36</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函数执行计时<br>console.time</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">timeTaken = <span class="function"><span class="params">callback</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.time(<span class="string">'timetask'</span>);</span><br><span class="line">    <span class="keyword">let</span> r = callback();</span><br><span class="line">    <span class="built_in">console</span>.timeEnd(<span class="string">'timetask'</span>);</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">timeTaken(<span class="function"><span class="params">()</span>=&gt;</span> anagrams(<span class="string">'abcdefghij'</span>));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>键值对转对象<br>[[‘a’,1],[‘b’,2]] -&gt; {a: 1, b: 2}</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objFromPairs = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">pre, val</span>) =&gt;</span> (pre[val[<span class="number">0</span>]] = val[<span class="number">1</span>], pre), &#123;&#125;);</span><br><span class="line"></span><br><span class="line">objFromPairs([[<span class="string">'a'</span>,<span class="number">1</span>],[<span class="string">'b'</span>,<span class="number">2</span>]]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>管道函数<br>pipe(func1,func2…)(args)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pipe = <span class="function">(<span class="params">...funcs</span>) =&gt;</span> arg =&gt; funcs.reduce(<span class="function">(<span class="params">funcArgs, func</span>) =&gt;</span> func(funcArgs), arg);</span><br><span class="line"></span><br><span class="line">pipe(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="number">1</span>, x =&gt; <span class="built_in">console</span>.log(x))(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成数组幂集<br>[1,2] -&gt; [[], [1], [2], [2,1]]</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">powerset = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">pre, val</span>) =&gt;</span> pre.concat(pre.map(<span class="function"><span class="params">ele</span> =&gt;</span> [val].concat(ele))), [[]]);</span><br><span class="line"></span><br><span class="line">powerset([<span class="number">1</span>,<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>范围内随机数(默认0-100)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">randomInRange = <span class="function">(<span class="params">min = <span class="number">0</span>, max = <span class="number">100</span></span>) =&gt;</span> <span class="built_in">Math</span>.random() * (max - min) + min;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.floor(randomInRange(<span class="number">2</span>,<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>随机化数组顺序</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shuffle = <span class="function"><span class="params">arr</span> =&gt;</span> arr.sort(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">Math</span>.random() - <span class="number">0.5</span>);</span><br><span class="line"></span><br><span class="line">shuffle([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>RGB转十六进制<br>(255, 165, 1) -&gt; ‘ffa501’。 *padStart(ES2017)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//rgbToHex = (r, g, b) =&gt; ((r &lt;&lt; 16) + (g &lt;&lt; 8) + b).toString(16).padStart(6,'0');</span></span><br><span class="line">rgbToHex = <span class="function">(<span class="params">r, g, b</span>) =&gt;</span> ((r &lt;&lt; <span class="number">16</span>) + (g &lt;&lt; <span class="number">8</span>) + b).toString(<span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">rgbToHex(<span class="number">255</span>,<span class="number">165</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>字符串中字母排序<br>使用split（’‘）分割字符串，sort（）使用localeCompare（），使用join(‘’)重新组合</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sortCharsInString = <span class="function"><span class="params">str</span> =&gt;</span> [...str].sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.localeCompare(b)).join(<span class="string">''</span>);</span><br><span class="line"></span><br><span class="line">sortCharsInString(<span class="string">'ibsuidibjbacb'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数组元素求和<br>reduce累加</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sumArray = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(<span class="function">(<span class="params">sum, val</span>) =&gt;</span> sum + val, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">sumArray([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>交换变量值<br>数组解构</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="string">'bbb'</span>;</span><br><span class="line"><span class="keyword">let</span> c = &#123; <span class="attr">key</span>: <span class="string">'value'</span> &#125;;</span><br><span class="line">[a, b, c] = [c, a, b];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(a) + <span class="string">'-'</span> + b + <span class="string">'-'</span> + c)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>数组去重<br>…new Set(arr)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unique = <span class="function"><span class="params">arr</span> =&gt;</span> [...new <span class="built_in">Set</span>(arr)];</span><br><span class="line"></span><br><span class="line">unique([<span class="number">11</span>,<span class="number">22</span>,<span class="number">3</span>,<span class="number">444</span>,<span class="number">444</span>,<span class="number">55</span>,<span class="number">55</span>]);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>获取URL参数<br>match + reduce + map</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getUrlParameters = <span class="function"><span class="params">url</span> =&gt;</span></span><br><span class="line">    url.match(<span class="regexp">/([^?=&amp;]+)(=([^&amp;]*))/g</span>).reduce(<span class="function">(<span class="params">obj, val</span>) =&gt;</span></span><br><span class="line">        (obj[val.slice(<span class="number">0</span>, val.indexOf(<span class="string">'='</span>))] = val.slice(val.indexOf(<span class="string">'='</span>) + <span class="number">1</span>), obj), &#123;&#125;);</span><br><span class="line"></span><br><span class="line">getUrlParameters(<span class="string">'http://url.com/page?name=Adam&amp;surname=Smith'</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>验证数字<br>使用！isNaN和parseFloat（）来检查参数是否是一个数字，使用isFinite（）来检查数字是否是有限</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">validateNumber = <span class="function"><span class="params">n</span> =&gt;</span> !<span class="built_in">isNaN</span>(<span class="built_in">parseFloat</span>(n)) &amp;&amp; <span class="built_in">isFinite</span>(n) &amp;&amp; <span class="built_in">Number</span>(n) == n;</span><br><span class="line"></span><br><span class="line">validateNumber(<span class="number">10.1</span>);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>过滤空值<br>空值指的是没有具体意义的一些值，比如0，undefined，null，false，空字符串等</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> res = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="string">'0'</span>, <span class="literal">undefined</span>, <span class="literal">null</span>, <span class="literal">false</span>, <span class="string">''</span>].filter(<span class="built_in">Boolean</span>);</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://jarryliu-p.github.io/2019/05/05/前端常用代码示例-1/" data-id="cjx4kciv80005wwv5k0y2fgpb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ECMAScript-JavaScript/">ECMAScript(JavaScript)</a></li></ul>
 
     </footer>
   </div>
@@ -684,7 +649,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code-Review/">Code Review</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript-JavaScript/">ECMAScript(JavaScript)</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Layout/">Layout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-Type/">MIME Type</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-T/">T&T</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code-Review/">Code Review</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ECMAScript-JavaScript/">ECMAScript(JavaScript)</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Layout/">Layout</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIME-Type/">MIME Type</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/">Nginx</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/">SSH</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-T/">T&T</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/">TCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/">TypeScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -694,7 +659,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Code-Review/" style="font-size: 10px;">Code Review</a> <a href="/tags/ECMAScript-JavaScript/" style="font-size: 10px;">ECMAScript(JavaScript)</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Layout/" style="font-size: 10px;">Layout</a> <a href="/tags/MIME-Type/" style="font-size: 10px;">MIME Type</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/T-T/" style="font-size: 10px;">T&T</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a>
+      <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/Code-Review/" style="font-size: 10px;">Code Review</a> <a href="/tags/ECMAScript-JavaScript/" style="font-size: 10px;">ECMAScript(JavaScript)</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Layout/" style="font-size: 10px;">Layout</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIME-Type/" style="font-size: 10px;">MIME Type</a> <a href="/tags/Nginx/" style="font-size: 20px;">Nginx</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/T-T/" style="font-size: 10px;">T&T</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a>
     </div>
   </div>
 
@@ -703,7 +668,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -714,6 +679,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/08/07/systemctl命令/">systemctl命令</a>
+          </li>
         
           <li>
             <a href="/2019/06/20/改变/">改变</a>
@@ -729,10 +698,6 @@
         
           <li>
             <a href="/2019/05/06/TCP/">TCP</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/05/前端常用代码示例-1/">前端常用代码示例-1</a>
           </li>
         
       </ul>
